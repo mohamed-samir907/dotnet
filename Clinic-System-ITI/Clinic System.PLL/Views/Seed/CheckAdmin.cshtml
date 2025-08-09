@@ -1,0 +1,114 @@
+@{
+    ViewData["Title"] = "Check Admin Status";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-search"></i> Admin User Status
+                    </h4>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">
+                            <h5><i class="fas fa-exclamation-triangle"></i> Error!</h5>
+                            <p>@ViewBag.Error</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card @(ViewBag.AdminExists ? "border-success" : "border-danger")">
+                                    <div class="card-body text-center">
+                                        <i class="fas @(ViewBag.AdminExists ? "fa-check-circle text-success" : "fa-times-circle text-danger") fa-3x mb-3"></i>
+                                        <h5>Admin User</h5>
+                                        <p class="@(ViewBag.AdminExists ? "text-success" : "text-danger")">
+                                            @(ViewBag.AdminExists ? "✅ Exists" : "❌ Not Found")
+                                        </p>
+                                        @if (ViewBag.AdminExists)
+                                        {
+                                            <small class="text-muted">
+                                                <strong>Email:</strong> @ViewBag.AdminEmail<br>
+                                                <strong>Name:</strong> @ViewBag.AdminName
+                                            </small>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card @(ViewBag.HasAdminRole ? "border-success" : "border-warning")">
+                                    <div class="card-body text-center">
+                                        <i class="fas @(ViewBag.HasAdminRole ? "fa-shield-alt text-success" : "fa-exclamation-triangle text-warning") fa-3x mb-3"></i>
+                                        <h5>Admin Role</h5>
+                                        <p class="@(ViewBag.HasAdminRole ? "text-success" : "text-warning")">
+                                            @(ViewBag.HasAdminRole ? "✅ Assigned" : "⚠️ Not Assigned")
+                                        </p>
+                                        @if (!ViewBag.AdminExists)
+                                        {
+                                            <small class="text-muted">User must exist first</small>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            @if (!ViewBag.AdminExists)
+                            {
+                                <div class="alert alert-warning">
+                                    <h6><i class="fas fa-exclamation-triangle"></i> Admin User Not Found</h6>
+                                    <p>The default admin user has not been created yet. You need to create it first.</p>
+                                    <a href="/Seed/CreateAdmin" class="btn btn-primary">
+                                        <i class="fas fa-user-plus"></i> Create Admin User
+                                    </a>
+                                </div>
+                            }
+                            else if (!ViewBag.HasAdminRole)
+                            {
+                                <div class="alert alert-warning">
+                                    <h6><i class="fas fa-exclamation-triangle"></i> Admin Role Missing</h6>
+                                    <p>The user exists but doesn't have the Admin role assigned. Run the seeder to fix this.</p>
+                                    <a href="/Seed/CreateAdmin" class="btn btn-warning">
+                                        <i class="fas fa-cog"></i> Fix Admin Role
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-success">
+                                    <h6><i class="fas fa-check-circle"></i> All Set!</h6>
+                                    <p>Admin user is properly configured and ready to use.</p>
+                                    <a href="/Account/AdminLogin" class="btn btn-success">
+                                        <i class="fas fa-sign-in-alt"></i> Go to Admin Login
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    <div class="mt-4">
+                        <h6>Quick Actions:</h6>
+                        <div class="btn-group">
+                            <a href="/Seed/CreateAdmin" class="btn btn-outline-primary">
+                                <i class="fas fa-user-plus"></i> Create/Fix Admin
+                            </a>
+                            <button onclick="location.reload()" class="btn btn-outline-info">
+                                <i class="fas fa-sync-alt"></i> Refresh Status
+                            </button>
+                            <a href="/Account/AdminLogin" class="btn btn-outline-success">
+                                <i class="fas fa-sign-in-alt"></i> Admin Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

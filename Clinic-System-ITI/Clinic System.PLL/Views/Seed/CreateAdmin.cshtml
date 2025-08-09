@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "Create Admin User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-user-shield"></i> Create Default Admin User
+                    </h4>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Success != null)
+                    {
+                        if ((bool)ViewBag.Success)
+                        {
+                            <div class="alert alert-success">
+                                <h5><i class="fas fa-check-circle"></i> Success!</h5>
+                                <p>@ViewBag.Message</p>
+                                @if (ViewBag.Details != null)
+                                {
+                                    <hr>
+                                    <h6>Login Credentials:</h6>
+                                    @foreach (string detail in ViewBag.Details)
+                                    {
+                                        <p class="mb-1"><strong>@detail</strong></p>
+                                    }
+                                    <hr>
+                                    <div class="mt-3">
+                                        <a href="/Account/AdminLogin" class="btn btn-success">
+                                            <i class="fas fa-sign-in-alt"></i> Go to Admin Login
+                                        </a>
+                                        <a href="/Seed/CheckAdmin" class="btn btn-info">
+                                            <i class="fas fa-check"></i> Verify Admin
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger">
+                                <h5><i class="fas fa-exclamation-triangle"></i> Error!</h5>
+                                <p>@ViewBag.Message</p>
+                                <p>Please check the console output for more details.</p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            <h5><i class="fas fa-info-circle"></i> Manual Admin Creation</h5>
+                            <p>This tool will create the default admin user for the clinic management system.</p>
+                            <ul>
+                                <li>Creates system roles (Admin, Doctor, Patient)</li>
+                                <li>Creates default admin user with email: <strong>admin@clinic.com</strong></li>
+                                <li>Sets default password: <strong>Admin123!</strong></li>
+                                <li>Assigns Admin role and security claims</li>
+                            </ul>
+                            <p class="text-warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Note:</strong> Change the default password after first login for security.
+                            </p>
+                        </div>
+
+                        <div class="text-center">
+                            <form method="post" action="/Seed/CreateAdmin">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-user-plus"></i> Create Admin User
+                                </button>
+                            </form>
+                        </div>
+                    }
+
+                    <div class="mt-4">
+                        <h6>Quick Links:</h6>
+                        <div class="btn-group">
+                            <a href="/Seed/CheckAdmin" class="btn btn-outline-info">
+                                <i class="fas fa-search"></i> Check Admin Status
+                            </a>
+                            <a href="/Account/AdminLogin" class="btn btn-outline-success">
+                                <i class="fas fa-sign-in-alt"></i> Admin Login
+                            </a>
+                            <a href="/" class="btn btn-outline-secondary">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

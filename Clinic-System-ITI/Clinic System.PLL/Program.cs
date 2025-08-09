@@ -6,6 +6,7 @@ using Clinic_System.DAL.Database;
 using Clinic_System.DAL.Entities;
 using Clinic_System.DAL.Repo.Abstraction;
 using Clinic_System.DAL.Repo.Implementation;
+using Clinic_System.PLL.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -104,6 +105,25 @@ namespace Clinic_System.PLL
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            // Seed default admin user - Comment out after first run if desired
+            try
+            {
+                Console.WriteLine("🚀 Starting automatic admin seeding...");
+                var seedResult = await SeedData.Initialize(app.Services);
+                if (seedResult)
+                {
+                    Console.WriteLine("🎉 Admin seeding completed successfully!");
+                }
+                else
+                {
+                    Console.WriteLine("⚠️ Admin seeding failed - check logs above");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error during automatic seeding: {ex.Message}");
+            }
 
             app.Run();
         }
