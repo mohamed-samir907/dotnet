@@ -76,11 +76,11 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Night Shift</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.Count(d => d.Shift == Clinic_System.DAL.Enum.Shift.Night)</div>
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Afternoon Shift</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Model.Count(d => d.Shift == Clinic_System.DAL.Enum.Shift.Afternoon)</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-star fa-2x text-gray-300"></i>
+                            <i class="fas fa-sun fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -149,19 +149,12 @@
                                 <td>
                                     <strong>@doctor.Email</strong>
                                     <br>
-                                    <small class="text-muted">@doctor.Phone</small>
+                                    <small class="text-muted">@doctor.PhoneNumber</small>
                                 </td>
                                 <td>
-                                    @if (doctor.Department != null)
-                                    {
-                                        <span class="badge badge-info">@doctor.Department.Name</span>
-                                        <br>
-                                        <small class="text-muted">@doctor.Department.Description</small>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge badge-secondary">No Department</span>
-                                    }
+                                    <span class="badge badge-secondary">General</span>
+                                    <br>
+                                    <small class="text-muted">Medical Department</small>
                                 </td>
                                 <td>
                                     @{
