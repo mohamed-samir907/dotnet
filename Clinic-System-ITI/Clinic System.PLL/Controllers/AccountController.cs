@@ -119,6 +119,63 @@ namespace Clinic_System.PLL.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult AdminLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AdminLogin(LoginVM model, string? returnUrl)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = await userManager.FindByNameAsync(model.UseName);
+
+                    if (user != null)
+                    {
+                        bool result = await userManager.CheckPasswordAsync(user, model.Password);
+                        if (result)
+                        {
+                            // Check if user is Admin
+                            var roles = await userManager.GetRolesAsync(user);
+                            if (!roles.Contains("Admin"))
+                            {
+                                ModelState.AddModelError("", "Access denied. Admin privileges required.");
+                                return View(model);
+                            }
+
+                            List<Claim> claims = new List<Claim>();
+                            if (!string.IsNullOrEmpty(user.Image))
+                            {
+                                claims.Add(new Claim("UserImage", user.Image));
+                            }
+
+                            await signInManager.SignInWithClaimsAsync(user, model.RememberMe, claims);
+                            return RedirectToAction("Index", "Admin");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Invalid Username or Password");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Invalid Username or Password");
+                    }
+                    return View(model);
+                }
+            }
+            catch (Exception)
+            {
+                return View(model);
+            }
+
+            return View(model);
+        }
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model, string? returnUrl)
         {

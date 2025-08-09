@@ -10,13 +10,16 @@ namespace Clinic_System.PLL.Controllers
     public class AdminController : Controller
     {
         private readonly IDashBoardService _dashboardService;
-
         private readonly IDoctorService _doctorService;
+        private readonly IPatientService _patientService;
+        private readonly IAppointmentService _appointmentService;
 
-        public AdminController(IDashBoardService dashboardService, IDoctorService doctorService)
+        public AdminController(IDashBoardService dashboardService, IDoctorService doctorService, IPatientService patientService, IAppointmentService appointmentService)
         {
             _dashboardService = dashboardService;
             _doctorService = doctorService;
+            _patientService = patientService;
+            _appointmentService = appointmentService;
         }
 
         public IActionResult Index()
@@ -25,11 +28,33 @@ namespace Clinic_System.PLL.Controllers
             return View(dashboardData);
         }
 
-            public IActionResult ManageDoctors()
+        public IActionResult ManageDoctors()
         {
             var doctors = _doctorService.GetAllDoctors();
             return View("ManageDoctors", doctors);
         }
+
+        public IActionResult ManagePatients()
+        {
+            var patients = _patientService.GetAllPatients();
+            return View("ManagePatients", patients);
+        }
+
+        public IActionResult ManageAppointments()
+        {
+            var appointments = _appointmentService.GetAllAppointments();
+            return View("ManageAppointments", appointments);
+        }
+
+        public IActionResult AdminProfile()
+        {
+            return View();
+        }
+
+        public IActionResult Settings()
+        {
+            return View();
+        }
     }
-    }
+}
 

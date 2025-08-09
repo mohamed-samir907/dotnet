@@ -1,0 +1,245 @@
+@{
+    ViewData["Title"] = "Admin Settings";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-cogs"></i> System Settings
+        </h1>
+    </div>
+
+    <div class="row">
+        <!-- General Settings -->
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <i class="fas fa-sliders-h"></i> General Settings
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Clinic Name</label>
+                            <input type="text" class="form-control" value="Royal Clinic">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Contact Email</label>
+                            <input type="email" class="form-control" value="info@royalclinic.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Contact Phone</label>
+                            <input type="tel" class="form-control" value="+1 (555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Clinic Address</label>
+                            <textarea class="form-control" rows="3">123 Healthcare Avenue, Medical District, City, State 12345</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-weight-bold">Working Hours</label>
+                            <input type="text" class="form-control" value="Monday - Friday: 8:00 AM - 6:00 PM">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Changes
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Settings -->
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-success">
+                        <i class="fas fa-server"></i> System Configuration
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="setting-item mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Email Notifications</strong>
+                                <br>
+                                <small class="text-muted">Send email notifications for appointments</small>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="emailNotifications" checked>
+                                <label class="custom-control-label" for="emailNotifications"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-item mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>SMS Notifications</strong>
+                                <br>
+                                <small class="text-muted">Send SMS reminders to patients</small>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="smsNotifications">
+                                <label class="custom-control-label" for="smsNotifications"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-item mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Auto Backup</strong>
+                                <br>
+                                <small class="text-muted">Automatically backup system data</small>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="autoBackup" checked>
+                                <label class="custom-control-label" for="autoBackup"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-item mb-4">
+                        <label class="font-weight-bold">Session Timeout (minutes)</label>
+                        <select class="form-control">
+                            <option value="30">30 minutes</option>
+                            <option value="60" selected>60 minutes</option>
+                            <option value="120">2 hours</option>
+                            <option value="240">4 hours</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-item mb-4">
+                        <label class="font-weight-bold">Maximum File Upload Size (MB)</label>
+                        <input type="number" class="form-control" value="10" min="1" max="100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Security Settings -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-danger">
+                        <i class="fas fa-shield-alt"></i> Security Settings
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="security-card p-4 border rounded text-center h-100">
+                                <i class="fas fa-key fa-3x text-warning mb-3"></i>
+                                <h5>Password Policy</h5>
+                                <p class="text-muted">Configure password requirements and expiration</p>
+                                <button class="btn btn-outline-warning">Configure</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="security-card p-4 border rounded text-center h-100">
+                                <i class="fas fa-mobile-alt fa-3x text-info mb-3"></i>
+                                <h5>Two-Factor Auth</h5>
+                                <p class="text-muted">Enable or disable 2FA for admin accounts</p>
+                                <button class="btn btn-outline-info">Setup</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="security-card p-4 border rounded text-center h-100">
+                                <i class="fas fa-history fa-3x text-secondary mb-3"></i>
+                                <h5>Login History</h5>
+                                <p class="text-muted">View recent login attempts and sessions</p>
+                                <button class="btn btn-outline-secondary">View Logs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Maintenance -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-info">
+                        <i class="fas fa-tools"></i> System Maintenance
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <button class="btn btn-outline-primary btn-lg mb-2">
+                                    <i class="fas fa-database"></i>
+                                </button>
+                                <h6>Backup Database</h6>
+                                <p class="text-muted small">Create system backup</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <button class="btn btn-outline-success btn-lg mb-2">
+                                    <i class="fas fa-broom"></i>
+                                </button>
+                                <h6>Clear Cache</h6>
+                                <p class="text-muted small">Clear system cache</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <button class="btn btn-outline-warning btn-lg mb-2">
+                                    <i class="fas fa-file-alt"></i>
+                                </button>
+                                <h6>System Logs</h6>
+                                <p class="text-muted small">View application logs</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <button class="btn btn-outline-info btn-lg mb-2">
+                                    <i class="fas fa-chart-bar"></i>
+                                </button>
+                                <h6>Reports</h6>
+                                <p class="text-muted small">Generate system reports</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.setting-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.security-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.security-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.custom-control-label::before {
+    border-color: #d1d3e2;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+</style>
